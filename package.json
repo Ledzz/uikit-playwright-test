@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "playwright test",
     "build-image": "docker build -t playwright-docker .",
-    "test-in-docker": "docker run -it playwright-docker npm run dev & npm run test"
+    "test-in-docker": "docker run -it playwright-docker sh -c \"npm run dev & npm run test\""
   },
   "dependencies": {
     "@coconut-xr/xinteraction": "^0.1.12",
