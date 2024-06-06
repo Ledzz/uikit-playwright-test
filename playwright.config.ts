@@ -5,6 +5,10 @@ import { defineConfig, devices } from '@playwright/test';
  * https://github.com/motdotla/dotenv
  */
 // require('dotenv').config();
+const isWindows = process.platform === "win32";
+const isMacOS = process.platform === "darwin";
+
+const command = 'npm run dev'
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -31,21 +35,21 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  // projects: [
-  //   {
-  //     name: 'chromium',
-  //     use: { ...devices['Desktop Chrome'] },
-  //   },
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
   //
   //   {
   //     name: 'firefox',
   //     use: { ...devices['Desktop Firefox'] },
   //   },
   //
-  //   {
-  //     name: 'webkit',
-  //     use: { ...devices['Desktop Safari'] },
-  //   },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {
@@ -66,7 +70,16 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  // ],
+  ],
+  webServer:
+  // Waiting for web server is buggy on win and macos
+      isWindows || isMacOS
+          ? undefined
+          : {
+            command,
+            url: process.env.STORYSHOTS_URL,
+            reuseExistingServer: true,
+          },
 
   /* Run your local dev server before starting the tests */
   // webServer: {

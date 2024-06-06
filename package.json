@@ -9,8 +9,7 @@
     "lint": "eslint vite-project --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "playwright test",
-    "build-image": "docker build -t playwright-docker .",
-    "test-in-docker": "docker run -it playwright-docker sh -c \"npm run dev & npm run test\""
+    "test:docker": "./run-shots-in-docker.sh"
   },
   "dependencies": {
     "@coconut-xr/xinteraction": "^0.1.12",

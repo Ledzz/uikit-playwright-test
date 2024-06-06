@@ -1,0 +1,20 @@
+version: "3.9"
+volumes:
+  stories-node_modules:
+  stories-story-dist:
+services:
+  stories:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      # don't map node_modules and use a separate volume instead
+      # https://stackoverflow.com/a/38601156
+      - stories-node_modules:/app/node_modules
+      # docker runs changes ownership of folder it writes to, to root which brings all kinds of trouble
+      # therefore we map it to different places
+      - stories-story-dist:/app/story-dist
+      # out of everything that is produced inside docker only this dir is mapped back to the project root
+      # this is to make use of this artifacts, say playwright report, on the host system
+      - ./test-results-from-docker:/app/test-results-from-docker
