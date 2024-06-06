@@ -1,2 +1,2 @@
-ARG PLAYWRIGHT_VERSION
-FROM mcr.microsoft.com/playwright:v1.44.1-jammy
+FROM node:22-alpine
+RUN playwright install

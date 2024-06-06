@@ -1,6 +1,7 @@
 import './App.css'
 import {Fullscreen, Image, Text} from "@react-three/uikit";
 import {Canvas} from "@react-three/fiber";
+import {Text as DreiText} from "@react-three/drei";
 
 function App() {
 
@@ -13,6 +14,10 @@ function App() {
                   </Text>
               </Image>
           </Fullscreen>
+
+          <DreiText color={0xffff00} anchorX="center" anchorY="middle"  renderOrder={10}>
+              Hello drei
+          </DreiText>
       </Canvas>
   )
 }
